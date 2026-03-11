@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('./config/postgres'); async function run(){ const res = await pool.query('SELECT id, username, role, is_active FROM users'); console.log(res.rows); pool.end(); } run();

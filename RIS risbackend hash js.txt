@@ -1,0 +1,21 @@
+/RIS/risbackend/
+	hash.js
+	server.js
+	/controller/
+		auditController.js  authController.js  userController.js
+
+	/db/
+		index.js	config.js  migration.js
+
+	/middleware/
+		authMiddleware.js
+
+	/models/
+		userModel.js	auditModel.js 
+	/routes/
+		auditRoutes.js  auth.js  authRoutes.js  UserProfile.js  userRoutes.js
+	/uploads/
+		profile_pics/
+	/utils/
+		jwt.js
+

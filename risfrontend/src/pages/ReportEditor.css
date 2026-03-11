@@ -1,0 +1,1216 @@
+/* src/pages/ReportEditor.css */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+
+/* Font Families */
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-serif-premium {
+  font-family: 'Crimson Text', 'Times New Roman', serif;
+}
+
+/* A4 Page Layout */
+.print-layout-container {
+  background-color: #f1f5f9;
+  padding: 2rem;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* MS Word-like paper look in Editor */
+.printable-area {
+  background: white;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 1rem auto;
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+  padding: 10mm 12mm;
+  /* Standard margins */
+  display: block;
+  position: relative;
+  /* Visual guide for page breaks in editor view only */
+  background-image: linear-gradient(to bottom, transparent 296.5mm, #e2e8f0 296.5mm, #e2e8f0 297mm, transparent 297mm);
+  background-size: 100% 297mm;
+}
+
+/* Page Indicator for Editor Only */
+.printable-area::after {
+  content: "Page 1 Page 2 Page 3 Page 4";
+  position: absolute;
+  top: 298mm;
+  left: -40px;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  color: #94a3b8;
+  letter-spacing: 280mm;
+  pointer-events: none;
+}
+
+/* ---------------- MEDICAL REPORTS GRID SYSTEM ---------------- */
+
+/* Header Area */
+.medical-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 3px solid #000;
+  padding-bottom: 1rem;
+}
+
+.hospital-logo-placeholder {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+}
+
+.hospital-details {
+  flex: 1;
+  text-align: center;
+}
+
+.hospital-name {
+  font-family: 'Crimson Text', serif;
+  font-size: 26pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.hospital-address {
+  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  color: #334155;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Patient Info Grid - Adjusted for long names */
+.patient-info-grid {
+  display: grid;
+  /* Columns: Label | Value (Name/Wide) | Label | Value (ID/Short) */
+  /* We want specific control like the old table: 15% | 45% | 20% | 20% approximately */
+  grid-template-columns: 100px 1fr 100px 1fr;
+  border: 1px solid #000;
+  margin-bottom: 1.5rem;
+}
+
+.patient-info-row {
+  display: contents;
+  /* Allows children to participate in the main grid */
+}
+
+/* For specific merging if needed, or just rely on the grid lines */
+.info-cell {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+  /* Prevent spillover */
+}
+
+/* Remove right border for the last cell in a row */
+.info-cell:nth-child(4n) {
+  border-right: none;
+}
+
+/* Remove bottom border for the last 4 cells (last row) relies on knowing total count, 
+   but with 'display: contents' rows, we might need a different approach.
+   Let's stick to simple cell counting or use a wrapper class for rows if structure changes.
+   For now, we keep the flat structure but adjust widths.
+*/
+.info-cell:nth-last-child(-n+4) {
+  border-bottom: none;
+}
+
+.info-label {
+  background-color: #f8fafc;
+  /* Even lighter gray */
+  color: #64748b;
+  font-family: 'Inter', sans-serif;
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1px 4px;
+  border-bottom: 1px dotted #e2e8f0;
+  letter-spacing: 0.02em;
+}
+
+.info-value {
+  padding: 2px 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10pt;
+  font-weight: 600;
+  color: #0f172a;
+  background: white;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+}
+
+/* Report Title */
+.report-title-strip {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.report-title-text {
+  font-family: 'Crimson Text', serif;
+  font-size: 16pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  color: #0f172a;
+}
+
+/* Main Content Area */
+.report-body {
+  font-family: 'Crimson Text', serif;
+  /* Classic Medical Serif */
+  font-size: 12.5pt;
+  line-height: 1.65;
+  color: #000;
+  min-height: 120mm;
+}
+
+.report-body p {
+  margin-bottom: 1em;
+  text-align: justify;
+}
+
+.report-body h1,
+.report-body h2,
+.report-body h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  font-size: 11pt;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e2e8f0;
+  display: inline-block;
+}
+
+/* Footer & Signature */
+.signature-section {
+  page-break-inside: avoid;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+.signature-block {
+  text-align: center;
+  min-width: 220px;
+}
+
+.digital-sign-img {
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 0px;
+}
+
+.sign-line {
+  border-top: 2px solid #334155;
+  padding-top: 6px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 10pt;
+}
+
+.footer-fixed {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 15mm;
+  background: white;
+  z-index: 1000;
+  border-top: 2px solid #000;
+  padding: 6px 12mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 8pt;
+  color: #475569;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+    margin-bottom: 15mm;
+    /* Space for Page Numbering */
+    padding: 0;
+
+    /* GOLD STANDARD: Page Numbering (Chrome/Edge Support) */
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: 'Inter', sans-serif;
+      font-size: 8pt;
+      color: #94a3b8;
+      padding-right: 15mm;
+      padding-bottom: 10mm;
+    }
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .printable-area {
+    margin: 0;
+    width: 100%;
+    min-height: 297mm;
+    box-shadow: none;
+    padding: 15mm 15mm 15mm 15mm;
+    /* Balanced Margins */
+    background-image: none;
+  }
+
+  .printable-area::after {
+    display: none;
+  }
+
+  /* Hide UI */
+  .no-print,
+  .medical-sidebar,
+  .control-strip-glass,
+  .status-bar-glass,
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .only-print {
+    display: block !important;
+  }
+
+  /* Clear inputs for print */
+  textarea,
+  input {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    resize: none !important;
+    overflow: visible !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    color: inherit !important;
+    width: auto !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure backgrounds print */
+  .bg-slate-50 {
+    background-color: #f8fafc !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Border fidelity */
+  .border-slate-800,
+  .border-slate-300,
+  .border-black {
+    border-color: #000 !important;
+  }
+
+  /* Footer Fix */
+  .footer-fixed {
+    position: fixed;
+    bottom: 0;
+  }
+
+  /* Prevent breaks inside critical elements */
+  .patient-info-grid,
+  .signature-section,
+  figure {
+    page-break-inside: avoid;
+  }
+}
+
+/* Helper for Inputs in Grid */
+.grid-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.grid-input::placeholder {
+  color: #cbd5e1;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@media print {
+  .grid-input {
+    display: none !important;
+    /* Hide inputs in print just in case */
+  }
+}
+
+/* Critical Finding Alert */
+.critical-finding-alert {
+  background: #fff1f2;
+  border: 1px solid #e11d48;
+  color: #be123c;
+  padding: 8px 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media print {
+  .critical-finding-alert {
+    border: 2px solid #000;
+    color: #000;
+    background: transparent;
+  }
+}
+
+/* Watermark */
+.watermark {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 6rem;
+  font-weight: 900;
+  color: #000;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Grid Images for Print (4 per row) */
+.print-content figure {
+  display: inline-block;
+  width: 22%;
+  margin: 1.5%;
+  vertical-align: top;
+  border: 1px solid #e2e8f0;
+  padding: 4px;
+  background: white;
+}
+
+@media print {
+  .print-content figure {
+    border: 1px solid #000;
+  }
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+/* A4 Page Layout */
+.print-layout-container {
+  background-color: #f1f5f9;
+  padding: 2rem;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+  border: 2px solid #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* MS Word-like paper look in Editor */
+.printable-area {
+  background: white;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 1rem auto;
+  box-shadow: none !important;
+  /* User requested removal of shadow screen */
+  border: 1px solid #e2e8f0;
+  /* Subtle border instead */
+  padding: 10mm;
+  display: block;
+  /* Changed from flex to prevent table squishing */
+  position: relative;
+  background-image: linear-gradient(to bottom, transparent 296mm, #e2e8f0 296mm, #e2e8f0 297mm, transparent 297mm);
+  background-size: 100% 297mm;
+}
+
+
+/* Page Indicator for Editor Only */
+.printable-area::after {
+  content: "Page 1 Page 2 Page 3 Page 4";
+  position: absolute;
+  top: 298mm;
+  left: -40px;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  color: #94a3b8;
+  letter-spacing: 280mm;
+  pointer-events: none;
+}
+
+/* Main Table for Layout */
+table.main-table,
+table.main-table td {
+  border: none !important;
+}
+
+table.main-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  /* Changed from fixed to allow header rows to expand */
+}
+
+.report-content-cell {
+  vertical-align: top;
+  padding: 5mm 0;
+  /* min-height removed to allow natural height */
+  /* min-height: 190mm; */
+}
+
+/* Only Print Elements */
+/* DEFAULT: HIDDEN ON SCREEN */
+.only-print {
+  display: none;
+  /* Removed !important to allow overrides */
+}
+
+@media print {
+
+  /* 1. PAGE SETUP: Let the browser handle the paper edge */
+  /* 1. PAGE SETUP: Top Notch Algorithm for A4 */
+  @page {
+    size: A4;
+    margin: 0;
+    /* CRITICAL: Reset browser margins to 0. We control layout via body/padding. */
+  }
+
+  /* 2. ROOT RESET: Kill Single Page App (SPA) layout rules */
+  html,
+  body,
+  #root,
+  .app-container,
+  .flex-1,
+  .h-screen,
+  .w-screen {
+    width: 100% !important;
+    height: auto !important;
+    /* ALLOW GROWTH */
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    /* ALLOW SCROLL/PAGINATION */
+    position: static !important;
+    display: block !important;
+    /* DISABLE FLEX/GRID */
+  }
+
+  /* 3. HIDE UI: Remove them from the flow completely */
+  .no-print,
+  header,
+  footer,
+  nav,
+  aside,
+  .toolbar-glass,
+  .status-bar-glass,
+  .sidebar-glass,
+  .medical-sidebar,
+  .report-title-strip,
+  .watermark {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+
+  /* 4. PRINTABLE AREA: Natural Flow */
+  .printable-area {
+    display: block !important;
+    position: relative !important;
+    /* NATURAL FLOW, NOT ABSOLUTE */
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 15mm !important;
+    /* This is the ACTUAL margin now */
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+    line-height: 1.5;
+    overflow: visible !important;
+    z-index: 10;
+  }
+
+  /* 5. TABLE HANDLING */
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* 6. TYPOGRAPHY LOCK (Premium Professional Style) */
+  .print-header-name {
+    font-family: 'Crimson Text', 'Times New Roman', serif !important;
+    font-weight: 900 !important;
+    /* Maximum Weight */
+    font-size: 22pt !important;
+    /* User Requested: 22pt */
+    letter-spacing: 0.15em !important;
+    line-height: 1.1 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 1mm !important;
+    color: #000 !important;
+    /* Pure Black */
+  }
+
+  .print-header-address {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 9pt !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em !important;
+    color: #52525b !important;
+    /* Zinc-600 (Lighter than name) */
+    white-space: normal !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+
+  .print-header-email-label {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 8pt !important;
+    font-weight: 600 !important;
+    color: #606060 !important;
+    text-transform: uppercase !important;
+  }
+
+  .print-header-email-value {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 9pt !important;
+    font-weight: 400 !important;
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+
+  .print-header-contact {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 9pt !important;
+    letter-spacing: 0.1em !important;
+    color: #404040 !important;
+  }
+
+  /* Body Content Lock */
+  .ProseMirror,
+  .report-content {
+    font-family: 'Crimson Text', serif !important;
+    font-size: 12pt !important;
+    /* Standard readable size */
+    line-height: 1.4 !important;
+    text-align: justify !important;
+  }
+
+  /* Force text color */
+  * {
+    color: black !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    text-rendering: optimizeLegibility !important;
+  }
+
+  /* FORCE VISIBILITY in Print (Now inside @media print) */
+  .only-print {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #000 !important;
+    /* Force Black */
+    height: auto !important;
+    width: auto !important;
+  }
+
+  /* Fixed Footer */
+  .fixed-footer-stripe {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: white;
+    z-index: 9999;
+    padding-bottom: 5mm;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* FORCE PRINT VIEW CLASS (For html2canvas/PDF Generation) */
+/* This mimics @media print behavior when the class is manually added to logic */
+.force-print-view .no-print,
+.force-print-view .medical-sidebar,
+.force-print-view .control-strip-glass,
+.force-print-view .status-bar-glass,
+.force-print-view ::-webkit-scrollbar,
+.force-print-view .grid-input-ui {
+  display: none !important;
+}
+
+.force-print-view .only-print {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #000 !important;
+  /* Ensure black text */
+  height: auto !important;
+}
+
+.force-print-view .printable-area {
+  display: block !important;
+  transform: none !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  padding: 10mm !important;
+  /* Restore standard padding for PDF */
+  background: white !important;
+}
+
+.force-print-view textarea,
+.force-print-view input {
+  /* Hide inputs in force mode if somehow they persist */
+  display: none !important;
+}
+
+.force-print-view .bg-slate-50 {
+  background-color: #f8fafc !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Space Reservation */
+tfoot {
+  display: table-footer-group;
+}
+
+.footer-spacer {
+  height: 25mm !important;
+  /* Matched to TSX tfoot height to prevent overlap */
+  visibility: hidden;
+}
+
+.signature-block {
+  page-break-inside: avoid;
+  margin-top: 2rem;
+}
+
+/* Cleaned up legacy print styles */
+
+.ProseMirror {
+  outline: none;
+  font-size: 11pt;
+  line-height: 1.6;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.5em;
+}
+
+/* Glassmorphism Ultilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.glass-toolbar {
+  background: rgba(15, 23, 42, 0.85);
+  /* Slate-900 with opacity */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+}
+
+/* Patient Card Grid - Fix Overlap & Premium Look */
+.patient-card-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  border: 1.5pt solid black;
+}
+
+.patient-card-table td {
+  border: 1pt solid black;
+  padding: 4px 8px;
+  /* Slightly reduced padding to give text more room */
+  font-size: 11pt;
+  line-height: 1.25;
+  overflow: hidden;
+  /* Prevent spillover */
+  text-overflow: ellipsis;
+  /* Ellipsis for really long text if it still overflows */
+  vertical-align: middle;
+}
+
+.patient-card-table .label-cell {
+  background-color: #e2e8f0;
+  /* Slate-200 for better contrast */
+  color: #0f172a;
+  /* Slate-900 */
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.patient-card-table .val-cell {
+  color: black;
+  font-weight: 600;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.patient-card-table tr:hover .val-cell {
+  background-color: #f8fafc;
+}
+
+/* Premium Input Reset */
+.field-input-reset {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  resize: none;
+  display: block;
+}
+
+.field-input-reset:focus {
+  background-color: rgba(59, 130, 246, 0.05);
+  /* Very subtle blue focus */
+  border-radius: 2px;
+}
+
+/* ADVANCED MEDICAL SIDEBAR */
+.medical-sidebar {
+  width: 72px;
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1.5rem;
+  z-index: 50;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  /* Enable scrolling */
+  height: 100%;
+  /* Ensure full height */
+}
+
+.sidebar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-label {
+  font-size: 9px;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.sidebar-btn {
+  color: #64748b;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.sidebar-btn:hover {
+  color: #2563eb;
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+.sidebar-btn.active {
+  color: #2563eb;
+  background: #eff6ff;
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+.sidebar-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(226, 232, 240, 0.8), transparent);
+}
+
+/* CONTROL STRIP & IDENTITY STRIP */
+.patient-identity-strip {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.identity-badge {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism for Top Bar */
+.control-strip-glass {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sidebar-group:hover .sidebar-label {
+  color: #3b82f6;
+}
+
+/* CRITICAL FINDING ALERT */
+.critical-finding-alert {
+  background: #fef2f2;
+  border: 2px solid #ef4444;
+  color: #b91c1c;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.08);
+}
+
+@media print {
+  .critical-finding-alert {
+    border: 2px solid #000;
+    color: #000;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+/* Expert Compact Footer */
+.contact-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 8.5pt;
+  color: #334155;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.contact-line>div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* --- PREMIUM MEDICAL GRADE UI --- */
+
+/* 1. Standard Serif Font for Authority */
+.font-serif-premium {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* 2. Watermark */
+.watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 8rem;
+  font-weight: 900;
+  color: #0f172a;
+  opacity: 0.04;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: -1;
+}
+
+/* 3. Boxed Table - Premium Grid Look */
+.patient-card-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0.5rem;
+  border: 1.5pt solid black !important;
+}
+
+.patient-card-table td {
+  border: 1pt solid black !important;
+  padding: 3px 4px;
+  vertical-align: middle;
+}
+
+/* PRIORS TIMELINE */
+.priors-timeline {
+  position: relative;
+  border-left: 2px solid #f1f5f9;
+}
+
+.priors-dot {
+  position: absolute;
+  left: -23.5px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  border: 2px solid white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+/* Glassmorphism for Priors Panel */
+.priors-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.priors-card:hover {
+  border-color: #bfdbfe;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Dictation Pulse Glow */
+.listening-pulse {
+  animation: listen-pulse 2s infinite ease-in-out;
+}
+
+@keyframes listen-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(59, 130, 246, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+/* FIX: Gold Standard 4-Column Grid */
+.print-content figure.report-grid-figure {
+  width: 21% !important;
+  /* Strictly 21% */
+  margin: 1.5% !important;
+  /* 1.5% * 8 = 12%. 21*4=84. 84+12=96%. Safe. */
+  float: left !important;
+  display: block !important;
+  /* Treat as block for float to work reliably */
+
+  vertical-align: top !important;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  padding: 4px !important;
+  /* Padding inside the border */
+  border-radius: 4px;
+
+  /* Reset Flex if it was leaking */
+  flex: none !important;
+
+  height: auto !important;
+  overflow: hidden;
+  /* Contain floats inside if any */
+  box-sizing: border-box !important;
+
+  page-break-inside: avoid !important;
+}
+
+.print-content figure.report-grid-figure img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1/1 !important;
+  object-fit: contain !important;
+  background: black;
+  display: block !important;
+  margin: 0 0 4px 0 !important;
+  /* Margin bottom for caption separation */
+  border: 1px solid #000;
+}
+
+.print-content figure.report-grid-figure figcaption {
+  display: block !important;
+  /* Ensure it sits below image */
+  width: 100% !important;
+
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10px !important;
+  /* Small letter */
+  font-style: italic !important;
+  /* Italic */
+  color: #334155 !important;
+
+  text-align: center !important;
+  padding-top: 4px !important;
+  border-top: 1px dotted #cbd5e1;
+  line-height: 1.2 !important;
+}
+
+/* Clearfix for the container to wrap floats */
+.print-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* Clearfix for floats */
+.print-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* FINAL OVERRIDE: 4-COLUMN GRID WITH CAPTIONS */
+.print-content figure,
+.print-content figure.report-grid-figure {
+  width: 22% !important;
+  margin: 1.5% !important;
+  float: left !important;
+  display: block !important;
+  vertical-align: top !important;
+  background-color: #f8fafc;
+  padding: 5px !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  height: auto !important;
+  box-sizing: border-box !important;
+  page-break-inside: avoid !important;
+}
+
+/* Force image to be block and separate from caption */
+.print-content figure img,
+.print-content figure.report-grid-figure img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1/1 !important;
+  object-fit: contain !important;
+  background: black !important;
+  display: block !important;
+  margin: 0 0 5px 0 !important;
+  border: 1px solid #000;
+}
+
+/* Force caption to be block at bottom */
+.print-content figure figcaption,
+.print-content figure.report-grid-figure figcaption {
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10px !important;
+  font-style: italic !important;
+  color: #334155 !important;
+  text-align: center !important;
+  border-top: 1px dotted #cbd5e1;
+  padding-top: 2px !important;
+}

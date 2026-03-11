@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2025-11-26T08:06:01.624Z",
+  "entry": {
+    "patient_name": "RAJU^FADIPATIL^30Y",
+    "patient_id_str": "3129495",
+    "patient_dob": null,
+    "patient_sex": null,
+    "accession_number": "58288",
+    "study_instance_uid": "1.2.392.200036.9125.2.448818514585232.65116167138.8232109",
+    "modality": null,
+    "scheduled_datetime": "2025-11-26T08:06:01.579Z",
+    "station_aet": "IPACX_MWL",
+    "description": "PACS Study"
+  }
+}

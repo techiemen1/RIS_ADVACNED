@@ -1,0 +1,1670 @@
+🧑‍⚕️ STEP 5 — THINK LIKE A HOSPITAL
+
+Ask these before writing code:
+
+What happens if PACS is down?
+
+What if patient ID duplicates?
+
+What if report is edited after sign?
+
+What if doctor logs in from mobile?
+
+What if audit is requested by regulator?
+
+Phase 0 — Planning (1–2 days)
+
+Final module list
+
+Database schema
+
+Role matrix
+
+API contracts
+
+Phase 1 — Skeleton
+
+Empty backend
+
+Empty frontend
+
+Login only
+
+Health check endpoint
+
+Phase 2 — Core Clinical Flow
+
+Patient → Order → Study → Report
+
+1️⃣ “Design database first”
+2️⃣ “Design modules & API contracts”
+3️⃣ “Design hospital workflow (clinical flow)”
+4️⃣ “Design deployment & DevOps”
+
+0️⃣ First: Your Vision Is Correct
+Web-first
+Viewer-agnostic
+Modular
+Role-driven
+Zero hard dependency on a single PACS
+1️⃣ ACCESS MODEL (LAN / WAN / Cloud / Internet)
+| Access Type                  | How                     |
+| ---------------------------- | ----------------------- |
+| LAN (Hospital)               | Direct access           |
+| WAN (Branch / Teleradiology) | VPN or Zero-Trust       |
+| Cloud                        | Reverse proxy + TLS     |
+| Internet                     | Only via secure gateway |
+Architecture
+User
+ ↓
+HTTPS (TLS)
+ ↓
+Reverse Proxy (Nginx / Traefik)
+ ↓
+Auth Gateway (SSO / JWT)
+ ↓
+RIS + Viewer + APIs
+
+2️⃣ DEVICE & BROWSER SUPPORT 
+| Use Case               | Recommendation          |
+| ---------------------- | ----------------------- |
+| Desktop (Radiologists) | Chrome / Edge / Firefox |
+| Tablets                | Chrome / Safari         |
+| Mobile                 | Web (read-only / lite)  |
+| Diagnostic reading     | Desktop only (Weasis)   |
+Mobile is for:
+Review
+Clinical rounds
+Emergency lookups
+Radiologists → Desktop viewers only (compliance).
+3️⃣ UI / UX MODEL (Tabs like Chrome)
+Recommended UI Layout
+┌────────────────────────────────────────────┐
+│ iPACX RIS | Dashboard | PACS | Reports | … │  ← module tabs
+│                                            │
+│                               User ⌄       │  ← profile menu
+├────────────────────────────────────────────┤
+│                                            │
+│               Active Module                 │
+│                                            │
+└────────────────────────────────────────────┘
+Top-right user dropdown
+Profile
+Preferences
+Notifications
+Role switch (if allowed)
+Admin settings (admins only)
+Logout
+⚠️ Never mix admin tools into main workflow tabs
+
+4️⃣ MODULE-BY-MODULE PROFESSIONAL DESIGN
+4.1️⃣ Dashboard (Live, Aggregated)
+Purpose
+Single glass view of system health + workflow.
+Should show:
+Today’s studies
+Pending reports
+Critical findings
+PACS connectivity status
+Modality activity
+Failed DICOM sends
+Billing pending items
+User activity alerts
+Data Source
+RIS DB
+PACS REST
+Background jobs
+⚠️ Dashboard is read-only, fast, cached.
+4.2️⃣ Appointments (Scheduling Engine)
+Your idea is correct, but add constraints.
+Required Features
+Create / reschedule / cancel
+Modality-aware slots
+Radiologist availability
+Equipment downtime
+Status lifecycle:
+Scheduled → Arrived → Scanned → Reported → Billed
+Advanced (Phase 2)
+SMS / WhatsApp reminders
+No-show tracking
+Walk-in handling
+4.3️⃣ PACS Module (Very Important)
+PACS Worklist (Web)
+Pagination (server-side) 20 / 50 / 100 per page
+Filters: Date (today, yesterday, range) Modality Patient ID / Name Accession Status Sorting
+Lazy loading (critical for performance)
+Study Row Actions
+View Images (viewer)
+Open Report (split mode)
+Reassign radiologist
+Flag critical
+Audit history
+Viewer + Report (Split Mode)
+┌───────────────┬───────────────┐
+│   Viewer      │   Report      │
+│               │               │
+│               │               │
+└───────────────┴───────────────┘
+4.4️⃣ Modality Worklist (MWL Server)
+You must include this early.
+Features
+DICOM MWL SCP
+RIS → PACS → Modality
+Scheduled Procedure Steps
+Modality filtering
+4.5️⃣ Billing Module
+Keep it decoupled.
+Core
+CPT / LOINC mapping
+Procedure pricing
+Insurance logic
+Invoice generation
+Payment status
+4.6️⃣ Inventory
+Often ignored — but important.
+Consumables (contrast, film)
+Equipment maintenance
+AMC schedules
+Alerts
+4.7️⃣ Settings (User vs Admin)
+     Normal User
+Profile
+Signature
+Preferences
+Viewer defaults
+Notifications
+      Admin (Strict RBAC)
+User & role management
+PACS registry (Orthanc, dcm4chee)
+DICOM AE management
+HL7 / FHIR scripts
+Backup & restore
+Audit logs
+System health
+Security policies
+Login session rules
+⚠️ Admin UI must be physically separated.
+5️⃣ SECURITY & COMPLIANCE (NON-NEGOTIABLE)
+Mandatory
+HTTPS everywhere
+JWT + refresh tokens
+RBAC
+Audit logs
+IP restrictions
+Login time tracking
+Failed login alerts
+Session expiry
+Healthcare Reality
+If you design this now, certification later is easy.
+6️⃣ WHAT YOU DID NOT MENTION (BUT MUST ADD)
+These are professional must-haves:
+🔹 Audit & Legal
+Who viewed what study
+Who edited report
+Timestamped logs
+🔹 Downtime Mode
+PACS down
+Viewer cached
+Read-only fallback
+🔹 Multi-PACS Support
+Orthanc now
+dcm4chee later
+Vendor-neutral registry
+🔹 AI Integration (Future)
+AI result overlays
+Secondary capture
+Structured findings
+7️⃣ TECHNOLOGY RECOMMENDATION (Safe Choices)
+Layer	Tech
+Frontend	React + TypeScript
+Backend	Node.js (Nest later)
+DB	PostgreSQL
+PACS	Orthanc / dcm4chee
+Viewer	OHIF + Weasis
+Auth	JWT + optional SSO
+Infra	Docker + Portainer
+Proxy	Nginx / Traefik
+
+🏗️ REPORT MODULE — PROFESSIONAL ARCHITECTURE
+1️⃣ REPORT WORKFLOW (INDUSTRY STANDARD)
+
+This must be enforced, not optional.
+
+Draft
+  ↓
+Preliminary
+  ↓
+Final
+  ↓
+Addendum (if needed)
+
+Status Rules
+Status	Who can edit
+Draft	Radiologist
+Preliminary	Radiologist
+Final	Locked
+Addendum	Append only
+
+⚠️ Final reports must NEVER be editable
+Only addendums allowed.
+🏗️ REPORT MODULE — PROFESSIONAL ARCHITECTURE
+1️⃣ REPORT WORKFLOW (INDUSTRY STANDARD)
+
+This must be enforced, not optional.
+
+Draft
+  ↓
+Preliminary
+  ↓
+Final
+  ↓
+Addendum (if needed)
+
+Status Rules
+Status	Who can edit
+Draft	Radiologist
+Preliminary	Radiologist
+Final	Locked
+Addendum	Append only
+
+⚠️ Final reports must NEVER be editable
+Only addendums allowed.
+2️⃣ REPORT TYPES (YOU NEED ALL)
+| Type           | Purpose             |
+| -------------- | ------------------- |
+| Free-text      | Complex cases       |
+| Template-based | Speed + consistency |
+| Structured     | AI & analytics      |
+| Hybrid         | Real-world default  |
+Most hospitals use hybrid.
+3️⃣ TEMPLATE ENGINE (VERY IMPORTANT)
+Template Dimensions
+Templates are NOT just by modality.
+They must be configurable by:
+Modality
+Body part
+Clinical indication
+Protocol
+Radiologist preference
+Template Example
+{
+  "modality": "CT",
+  "bodyPart": "Chest",
+  "sections": [
+    "Clinical History",
+    "Technique",
+    "Findings",
+    "Impression"
+  ]
+}
+Smart Behaviors
+Auto-fill Technique from DICOM tags
+Auto-insert measurements
+Auto-suggest impression phrases
+4️⃣ VOICE DICTATION (MANDATORY)
+Minimum (Phase 1)
+Browser-based voice → text
+Manual correction
+Hotkeys
+Professional (Phase 2)
+Medical vocabulary
+Punctuation handling
+Section-aware dictation
+Offline fallback (desktop)
+Enterprise (Phase 3)
+Dragon / Google / Azure integration
+Speaker profiles
+Noise suppression
+⚠️ Never hardcode one voice provider
+
+5️⃣ AI-ASSISTED REPORTING (DESIGN NOW, ENABLE LATER)
+You mentioned:
+AI based reports
+Deep learning based reports
+Correct — but do NOT let AI auto-finalize reports.
+Correct AI Roles
+✔ Suggest findings
+✔ Suggest impressions
+✔ Flag abnormalities
+✔ Populate structured fields
+✔ Compare prior studies
+Architecture Pattern
+Image → AI Engine → Suggestions → Radiologist Approval
+6️⃣ KEY IMAGES (VERY IMPORTANT)
+What are Key Images?
+Annotated slices
+Representative findings
+Legal evidence
+System Requirements
+Capture from viewer
+Store reference (SOP UID + frame)
+Embed reference into report
+Exportable (PDF, HL7, DICOM SR)
+7️⃣ ULTRASOUND & DOPPLER MEASUREMENTS (SPECIAL CASE)
+You are absolutely right to call this out.
+Requirements
+Length, area, volume
+Doppler velocities
+Ratios (RI, PI)
+Auto-calculated values
+Integration Model
+Viewer sends measurements → RIS
+Report auto-populates values
+Locked once final
+⚠️ Measurements must be traceable to image.
+8️⃣ REPORT EDITOR UI (INDUSTRY STANDARD)
+Recommended Layout
+┌───────────────────────────────────────┐
+│ Viewer (images, tools, measurements)  │
+├───────────────────────────────────────┤
+│ Report Editor                         │
+│  - Sections                           │
+│  - Templates                          │
+│  - Voice input                        │
+│  - AI suggestions (side panel)        │
+└───────────────────────────────────────┘
+Mandatory Features
+Section locking
+Phrase library
+Macros
+Undo history
+Auto-save
+Compare previous reports
+9️⃣ REPORT SIGNING & LEGAL COMPLIANCE
+Required
+Digital signature
+Time-stamped
+User-bound
+Immutable after final
+Addendum Rules
+Linked to original report
+Date + reason mandatory
+Non-destructive
+🔐 10️⃣ AUDIT & TRACEABILITY (LEGAL REQUIREMENT)
+
+Every report action must be logged:
+| Action                 | Logged |
+| ---------------------- | ------ |
+| Create                 | ✅      |
+| Edit                   | ✅      |
+| Voice input            | ✅      |
+| AI suggestion accepted | ✅      |
+| Finalized              | ✅      |
+| Addendum               | ✅      |
+11️⃣ REPORT OUTPUT FORMATS
+
+You must support:
+
+✔ PDF
+✔ HL7 ORU
+✔ FHIR DiagnosticReport
+✔ DICOM SR (future)
+Design once — reuse forever.
+12️⃣ WHAT MOST SYSTEMS MISS (ADD THESE)
+These are high-value features:
+Critical findings alerts
+Peer review mode
+Teaching file tagging
+Research anonymization
+Multi-language reports
+Custom report branding per site
+CORRECT ARCHITECTURAL DEPENDENCY TREE
+Module Boundaries & APIs   ← MUST COME FIRST
+        ↓
+Report Workflow & States  ← MUST COME SECOND
+        ↓
+RBAC Matrix
+        ↓
+UI Wireframes
+        ↓
+Templates & Structured Reporting
+        ↓
+Voice + AI Integration
+I’ll define clear module boundaries and API contracts the way large healthcare vendors do it, so you can build confidently without rewrites.
+
+🏗️ STEP A — MODULE BOUNDARIES (AUTHORITATIVE)
+Core Principle (Lock This)
+
+Each module owns its data, logic, and lifecycle
+Other modules interact only via APIs, never by direct DB access.
+
+This is non-negotiable for scalability, compliance, and future integrations.
+SYSTEM MODULE MAP (High Level)
+┌──────────────┐
+│   Frontend   │  (Tabs, UX, Viewer Launch)
+└──────┬───────┘
+       ↓
+┌──────────────────────────────────────────────┐
+│                 API GATEWAY                  │
+└──────┬────────┬────────┬────────┬───────────┘
+       ↓        ↓        ↓        ↓
+   RIS Core  Reporting  Viewer   Admin
+              Module   Orchestr.
+       ↓        ↓        ↓
+     PACS Abstraction Layer
+       ↓
+   Orthanc / dcm4chee / Others
+1️⃣ RIS CORE MODULE (The Brain)
+Responsibility
+Owns workflow, not images.
+Owns
+Patients
+Orders / studies
+Appointments
+Status lifecycle
+Worklists
+
+Does NOT
+Render images
+Store DICOM
+Generate reports
+RIS Core APIs (Contract)
+GET    /api/ris/patients
+POST   /api/ris/patients
+GET    /api/ris/studies
+POST   /api/ris/studies
+PATCH  /api/ris/studies/{id}/status
+GET    /api/ris/worklist
+Example: Study Object (Canonical)
+2️⃣ PACS ABSTRACTION MODULE (Critical)
+Responsibility
+Vendor-neutral access to PACS.
+
+Owns
+PACS registry
+DICOMweb endpoints
+REST mappings
+Health checks
+
+Does NOT
+Store images
+Decide workflows
+PACS Registry API
+GET    /api/pacs
+POST   /api/pacs
+PUT    /api/pacs/{id}
+DELETE /api/pacs/{id}
+GET    /api/pacs/{id}/health
+Example PACS Record
+{
+  "id": "orthanc-primary",
+  "type": "ORTHANC",
+  "baseUrl": "http://192.168.1.34:8042",
+  "dicomWeb": "/dicom-web",
+  "aet": "IPACXPACS"
+}
+🔑 This allows Orthanc today, dcm4chee tomorrow without code changes.
+
+3️⃣ VIEWER ORCHESTRATION MODULE (Very Important)
+Responsibility
+Decides how a study is viewed.
+
+Owns
+Viewer registry
+Viewer URLs
+Launch rules
+
+Does NOT
+Render viewer UI
+Access PACS directly
+Viewer APIs
+GET /api/viewer/launch?studyId=...
+
+Response
+{
+  "url": "https://viewer.ipacx.local/viewer?StudyInstanceUIDs=1.2.840..."
+}
+Viewer Registry Example
+{
+  "viewerId": "ipacx-ohif",
+  "type": "OHIF",
+  "launchMode": "WEB",
+  "supports": ["CT", "MR", "XR"]
+}
+RIS never hardcodes viewers.
+This is how white-labeling stays clean.
+4️⃣ REPORTING MODULE (Isolated & Sacred)
+Responsibility
+Everything related to reports.
+
+Owns
+Report lifecycle
+Templates
+Versions
+Signatures
+AI suggestions
+Key images
+
+Does NOT
+Change study status directly
+Talk to PACS directly
+Reporting APIs
+POST   /api/reports
+GET    /api/reports/{studyId}
+PUT    /api/reports/{id}
+POST   /api/reports/{id}/finalize
+POST   /api/reports/{id}/addendum
+Report State (Immutable)
+{
+  "status": "DRAFT | PRELIM | FINAL | ADDENDUM"
+}.
+🔒 Final reports are immutable by design
+5️⃣ ADMIN MODULE (Strictly Separated)
+Responsibility
+System control & governance.
+
+Owns
+Users
+Roles
+Permissions
+PACS config
+Backups
+System health
+Audit logs
+
+Does NOT
+Touch clinical workflow
+Edit reports
+Admin APIs
+POST   /api/admin/users
+GET    /api/admin/roles
+POST   /api/admin/roles
+GET    /api/admin/audit
+POST   /api/admin/backup
+POST   /api/admin/restore
+6️⃣ INTEGRATION MODULE (HL7 / FHIR / AI)
+Responsibility
+All external systems.
+
+Owns
+HL7 listeners
+FHIR endpoints
+AI engines
+Webhooks
+
+Does NOT
+Store clinical truth
+Override user decisions
+Example
+POST /api/integration/hl7/orm
+POST /api/integration/ai/analyze
+🔐 GLOBAL RULES (LOCK THESE)
+
+❌ No module accesses another module’s DB
+✅ All interaction via APIs
+❌ No PACS logic in RIS
+✅ Viewer is replaceable
+✅ Reporting is immutable after final
+✅ Admin is isolated
+These rules make your system:
+Certifiable
+Scalable
+Vendor-neutral
+AI-ready
+
+🏁 STEP A COMPLETE
+You now have:
+Clear module ownership
+Clean API contracts
+Zero tight coupling
+Enterprise-grade foundation
+
+🧠 REPORT WORKFLOW & STATE MACHINE (AUTHORITATIVE)
+Core Principle (NON-NEGOTIABLE)
+
+A report is a legal medical document.
+Once finalized, it must be immutable.
+Corrections are handled via addendums, never edits.
+
+This is the foundation of radiology law worldwide
+1️⃣ REPORT STATE MACHINE (CANONICAL)
+            ┌───────────┐
+            │  DRAFT    │
+            └─────┬─────┘
+                  │
+                  ▼
+          ┌────────────────┐
+          │  PRELIMINARY   │
+          └─────┬──────────┘
+                  │
+                  ▼
+          ┌────────────────┐
+          │     FINAL      │  🔒 LOCKED
+          └─────┬──────────┘
+                  │
+                  ▼
+          ┌────────────────┐
+          │   ADDENDUM     │  ➕ APPEND ONLY
+          └────────────────┘
+2️⃣ STATE DEFINITIONS (VERY PRECISE)
+🟡 DRAFT
+Purpose: Working space for the radiologist.
+
+Characteristics
+Editable
+Auto-saved
+Voice dictation allowed
+AI suggestions allowed
+Templates editable
+Measurements auto-populate
+
+Who can access
+Assigned radiologist
+Supervising radiologist (optional)
+API
+POST /api/reports
+PUT  /api/reports/{id}
+🟠 PRELIMINARY
+
+Purpose: Urgent communication before final sign-off.
+Characteristics
+Visible to clinicians
+Marked clearly as Preliminary
+Editable by radiologist
+Cannot be auto-finalized
+Critical findings can be triggered
+Who can access
+Radiologists
+Clinicians (read-only)
+Legal Note
+Preliminary reports must be traceable.
+API
+POST /api/reports/{id}/preliminary
+🔵 FINAL (LOCKED)
+
+Purpose: Legal diagnostic report.
+Characteristics
+Digitally signed
+Timestamped
+Immutable
+Distributed (HL7 / PDF / FHIR)
+Stored permanently
+AI disabled at this stage
+Who can access
+Everyone (read-only)
+Only signing radiologist is listed
+Hard Rule
+
+❌ NO EDITS ALLOWED
+❌ NO DELETIONS
+
+API
+POST /api/reports/{id}/finalize
+🟣 ADDENDUM (APPEND-ONLY)
+
+Purpose: Correction or clarification after final.
+
+Characteristics
+Linked to original report
+Cannot modify original content
+Requires reason
+Signed separately
+Timestamped
+Example
+“Addendum: Upon further review…”
+
+API
+POST /api/reports/{id}/addendum
+3️⃣ REPORT VERSIONING MODEL (LEGAL SAFETY)
+Why versioning matters
+
+Audit
+Disputes
+Accreditation
+Version Rules
+| State       | Versioning     |
+| ----------- | -------------- |
+| Draft       | Incremental    |
+| Preliminary | Snapshotted    |
+| Final       | Version frozen |
+| Addendum    | New version    |
+Storage Model
+report_versions (
+  report_id,
+  version,
+  state,
+  content,
+  created_by,
+  created_at
+)
+Nothing is ever deleted.
+4️⃣ ROLE-BASED PERMISSIONS (TIED TO STATES)
+| Role               | Draft | Prelim | Final | Addendum |
+| ------------------ | ----- | ------ | ----- | -------- |
+| Radiologist        | ✏️    | ✏️     | 🔒    | ➕        |
+| Senior Radiologist | 👀    | ✏️     | 🔒    | ➕        |
+| Clinician          | 👀    | 👀     | 👀    | 👀       |
+| Admin              | ❌     | ❌      | ❌     | ❌        |
+⚠️ Admins NEVER edit reports
+
+5️⃣ AI & VOICE RULES (VERY IMPORTANT)
+AI Allowed ONLY In:
+Draft
+Preliminary
+AI Forbidden In:
+Final
+Addendum
+AI Interaction Model
+AI Suggestion → Radiologist Accepts → Becomes Text
+AI suggestions are logged.
+6️⃣ KEY IMAGES & MEASUREMENTS (STATE-AWARE)
+Draft / Preliminary
+Can add/remove key images
+Can edit measurements
+Final
+Key images locked
+Measurements locked
+Addendum
+New key images allowed
+Old ones untouched
+
+Each key image stores:
+SOP Instance UID
+Frame
+Annotation metadata
+7️⃣ CRITICAL FINDINGS WORKFLOW
+
+This is industry standard.
+Trigger conditions
+Radiologist flags finding as critical
+System actions
+Immediate alert (SMS / app / email)
+Timestamp logged
+Acknowledgement tracked
+Critical flags are preserved forever.
+8️⃣ ERROR & EDGE CASE HANDLING
+Radiologist unavailable mid-report
+Draft auto-saved
+Another radiologist can resume (if allowed)
+Report sent prematurely
+Must be finalized or addendum added
+Never overwritten
+
+9️⃣ WHAT WE JUST LOCKED 🔒
+You now have:
+
+✔ Legally defensible workflow
+✔ Immutable reporting
+✔ AI-safe design
+✔ Audit-ready structure
+✔ Multi-hospital compliant logic
+
+This is enterprise-grade.
+1️⃣ Report Editor UI Wireframe (foundation)
+2️⃣ Template & Structured Reporting Model (built on UI)
+3️⃣ Voice + AI Integration Strategy (plugs into both)
+PART 1️⃣ — REPORT EDITOR UI WIREFRAME (INDUSTRY STANDARD)
+🎯 Design Goal
+
+Maximize radiologist speed, focus, and legal safety.
+🧱 CANONICAL REPORTING SCREEN LAYOUT
+┌────────────────────────────────────────────────────────────┐
+│ Study Info | Status | Timer | Critical Flag | Finalize     │  ← Header
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Viewer (OHIF / Weasis embedded or side-by-side)           │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+│ Report Editor Tabs                                         │
+│  ├ Clinical History                                       │
+│  ├ Technique                                               │
+│  ├ Findings                                                │
+│  ├ Impression                                              │
+│  ├ Addendum (if any)                                       │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Active Section Editor                                     │
+│  - Rich text                                               │
+│  - Structured fields                                       │
+│  - Voice dictation                                         │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+│ Templates | Macros | AI Suggestions | Measurements | Save  │  ← Footer
+└────────────────────────────────────────────────────────────┘
+🔑 UI RULES (VERY IMPORTANT)
+| State       | UI Behavior               |
+| ----------- | ------------------------- |
+| Draft       | Fully editable            |
+| Preliminary | Editable + warning banner |
+| Final       | Read-only                 |
+| Addendum    | Append-only editor        |
+Buttons change based on state, not role alone.
+🧠 Radiologist Productivity Features
+
+✔ Auto-save every few seconds
+✔ Keyboard shortcuts
+✔ Phrase library (macros)
+✔ Section jump hotkeys
+✔ Report compare (prior study)
+⚠️ Finalize UX (Critical)
+
+Finalization must require:
+Confirmation dialog
+Password / biometric
+Legal disclaimer
+This prevents accidental final reports.
+PART 2️⃣ — TEMPLATE & STRUCTURED REPORTING MODEL
+
+Now that the UI is clear, we define how content is structured.
+
+🧩 TEMPLATE TYPES (ALL REQUIRED)
+1. Free Text
+Unlimited
+Used for rare cases
+
+2. Section Templates
+Findings boilerplates
+Impression patterns
+
+3. Structured Templates
+Dropdowns
+Checkboxes
+Measurements
+
+4. Hybrid (Default)
+Structured + editable narrative
+
+📐 TEMPLATE HIERARCHY (IMPORTANT)
+Global Templates
+  └── Modality Templates
+        └── Body Part Templates
+              └── Protocol Templates
+Radiologists can override without breaking structure.
+🗂️ TEMPLATE DATA MODEL
+{
+  "templateId": "ct-chest-v1",
+  "modality": "CT",
+  "sections": [
+    {
+      "name": "Findings",
+      "type": "structured",
+      "fields": [
+        {
+          "label": "Lung Nodules",
+          "type": "checkbox"
+        }
+      ]
+    }
+  ]
+}
+🧠 Smart Behaviors
+
+Auto-fill Technique from DICOM
+Auto-insert measurements
+Auto-suggest Impression text
+Prior comparison awareness
+🔐 Template Governance
+
+Admin creates base templates
+Radiologists can personalize
+Hospital-level locking supported
+
+PART 3️⃣ — VOICE + AI INTEGRATION STRATEGY
+
+Now we plug intelligence into the already-safe workflow.
+
+🎤 VOICE DICTATION (PHASED)
+Phase 1 (Now)
+Browser speech API
+Section-aware dictation
+Manual correction
+
+Phase 2
+Medical vocabulary
+Offline desktop (Weasis plugin)
+
+Phase 3
+Dragon / Azure / Google
+Speaker profiles
+✔ Provider-agnostic
+✔ No hard dependency
+🤖 AI ASSISTANCE (STRICTLY AUGMENTATIVE)
+AI CAN:
+
+Suggest findings
+Suggest impressions
+Compare prior reports
+Flag inconsistencies
+
+AI CANNOT:
+Finalize reports
+Modify signed content
+Operate silently
+🧠 AI Interaction Model
+Image → AI Engine
+       ↓
+ Structured Suggestions
+       ↓
+ Radiologist Accepts / Rejects
+       ↓
+ Becomes Report Content
+ ⚖️ MEDICO-LEGAL SAFEGUARDS
+
+✔ Human-in-the-loop
+✔ Audit trails
+✔ Explicit acceptance
+✔ Version tracking
+
+This protects:
+Radiologist
+Hospital
+You (vendor)
+
+Below is a healthcare-grade, state-aware Security & RBAC matrix, designed exactly the way enterprise RIS/PACS vendors do it.
+
+This will now become a locked architectural artifact 🔒.
+
+🔐 SECURITY & RBAC MATRIX (ENTERPRISE-GRADE)
+Core Security Principles (NON-NEGOTIABLE)
+Least privilege – users see only what they must
+State-aware permissions – rights depend on workflow state
+Role ≠ User – users can hold multiple roles
+Admin ≠ Clinician – absolute separation
+Audit everything – no silent actions
+1️⃣ USER ROLES (CANONICAL SET)
+These roles cover 95% of hospitals worldwide.
+Clinical Roles
+Radiologist
+Senior Radiologist / Supervisor
+Referring Clinician
+Technologist
+Operational Roles
+Reception / Scheduler
+Billing Officer
+Inventory Manager
+System Roles
+System Admin
+IT / PACS Admin
+Audit / Compliance Officer
+⚠️ A user may have multiple roles, but UI & permissions are resolved dynamically.
+2️⃣ MODULE-LEVEL ACCESS MATRIX
+| Module        | Radiologist | Clinician | Tech | Billing | Admin |
+| ------------- | ----------- | --------- | ---- | ------- | ----- |
+| Dashboard     | R           | R         | R    | R       | R     |
+| Appointments  | R           | R         | RW   | R       | RW    |
+| PACS Worklist | R           | R         | R    | ❌       | R     |
+| Viewer        | RW          | R         | R    | ❌       | R     |
+| Reporting     | RW          | R         | ❌    | ❌       | ❌     |
+| MWL           | ❌           | ❌         | RW   | ❌       | R     |
+| Billing       | ❌           | ❌         | ❌    | RW      | R     |
+| Inventory     | ❌           | ❌         | ❌    | ❌       | RW    |
+| Admin         | ❌           | ❌         | ❌    | ❌       | RW    |
+Legend:
+
+R = Read
+RW = Read / Write
+❌ = No access
+3️⃣ REPORTING — STATE-AWARE RBAC (VERY IMPORTANT)
+
+This is where most systems fail.
+Your system will not.
+
+📄 REPORT STATE PERMISSIONS
+| Role               | Draft   | Preliminary | Final   | Addendum |
+| ------------------ | ------- | ----------- | ------- | -------- |
+| Radiologist        | ✏️ Edit | ✏️ Edit     | 🔒 Read | ➕ Add    |
+| Senior Radiologist | 👀 Read | ✏️ Edit     | 🔒 Read | ➕ Add    |
+| Clinician          | 👀 Read | 👀 Read     | 👀 Read | 👀 Read  |
+| Technologist       | ❌       | ❌           | ❌       | ❌        |
+| Admin              | ❌       | ❌           | ❌       | ❌        |
+Hard Rules
+❌ Admins cannot edit reports
+❌ Final reports cannot be modified
+✅ Addendums are append-only
+✅ All transitions are logged
+4️⃣ ACTION-LEVEL PERMISSIONS (FINE-GRAINED)
+Report Actions
+| Action               | Allowed Roles       |
+| -------------------- | ------------------- |
+| Create report        | Radiologist         |
+| Edit draft           | Radiologist         |
+| Move to preliminary  | Radiologist         |
+| Finalize             | Radiologist         |
+| Add addendum         | Radiologist, Senior |
+| Delete report        | ❌ Nobody            |
+| Accept AI suggestion | Radiologist         |
+| Reject AI suggestion | Radiologist         |
+5️⃣ VIEWER & PACS SECURITY
+Viewer Actions
+| Action            | Radiologist | Clinician | Tech |
+| ----------------- | ----------- | --------- | ---- |
+| View images       | ✅           | ✅         | ✅    |
+| Annotate          | ✅           | ❌         | ❌    |
+| Capture key image | ✅           | ❌         | ❌    |
+| Measurements      | ✅           | ❌         | ❌    |
+PACS Admin Actions
+| Action            | PACS Admin |
+| ----------------- | ---------- |
+| Add PACS          | ✅          |
+| Remove PACS       | ✅          |
+| Change AE titles  | ✅          |
+| Test connectivity | ✅          |
+6️⃣ ADMIN & SYSTEM SECURITY (ISOLATED)
+Admin Capabilities (Strict)
+User creation / deactivation
+Role assignment
+PACS configuration
+HL7 / FHIR integration
+Backup / restore
+System health monitoring
+Security policy enforcement
+Explicitly Forbidden for Admin
+Editing reports
+Viewing patient images without audit
+Modifying clinical workflow states
+
+7️⃣ AUTHENTICATION & SESSION RULES
+Authentication
+Username + password (baseline)
+Optional MFA (recommended)
+Optional SSO (OIDC / SAML)
+Session Controls
+Idle timeout
+Max concurrent sessions
+IP / geo restriction
+Login time windows (optional)
+
+8️⃣ AUDIT & COMPLIANCE (MANDATORY)
+Audited Events
+Login / logout
+Report create / edit / finalize
+Viewer access
+PACS access
+AI suggestion usage
+Admin changes
+Failed logins
+Audit Log Rules
+Immutable
+Time-stamped
+User-bound
+Exportable
+This satisfies:
+NABH / JCI
+HIPAA principles
+GDPR principles
+9️⃣ DATA ACCESS CONTROL (PATIENT SAFETY)
+Patient access is role-scoped
+Cross-department access logged
+Emergency override (“break-glass”) logged
+Pediatric / VIP patient flags supported
+
+2️⃣ Database schema for reports + templates
+hospital-grade, legally safe, AI-ready database schema that:
+Supports all reporting workflows
+Enforces immutability
+Supports templates, AI, voice, key images
+Scales to multi-hospital / multi-PACS
+Avoids future migrations pain
+This is exactly how enterprise RIS vendors design it.
+
+🗄️ REPORTING DATABASE SCHEMA (AUTHORITATIVE)
+Design Principles (LOCKED)
+Reports are immutable after FINAL
+Versions are never deleted
+Templates are reusable & hierarchical
+AI & voice are metadata, not truth
+Key images are references, not copies
+1️⃣ CORE TABLES (MUST HAVE)
+🧾 reports — The Legal Record
+This table represents the current state of a report.
+CREATE TABLE reports (
+  id UUID PRIMARY KEY,
+  study_id UUID NOT NULL,
+  current_state VARCHAR(20) NOT NULL, -- DRAFT | PRELIM | FINAL | ADDENDUM
+  current_version INT NOT NULL,
+  signed_by UUID,
+  signed_at TIMESTAMP,
+  created_by UUID NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+
+  CONSTRAINT fk_reports_study FOREIGN KEY (study_id) REFERENCES studies(id)
+);
+Notes
+signed_by and signed_at are only populated on FINAL
+current_state drives RBAC & UI
+current_version points to report_versions
+📜 report_versions — Immutable History
+This is the most important table legally.
+CREATE TABLE report_versions (
+  id UUID PRIMARY KEY,
+  report_id UUID NOT NULL,
+  version INT NOT NULL,
+  state VARCHAR(20) NOT NULL,
+  content JSONB NOT NULL,
+  created_by UUID NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+
+  CONSTRAINT fk_versions_report FOREIGN KEY (report_id) REFERENCES reports(id),
+  UNIQUE (report_id, version)
+);
+Why JSONB?
+Supports free text
+Supports structured fields
+Supports AI annotations
+Future-proof
+
+❌ Never update a row here
+✅ Always insert a new version
+2️⃣ TEMPLATE SYSTEM (CRITICAL)
+📑 report_templates
+CREATE TABLE report_templates (
+  id UUID PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  modality VARCHAR(20),
+  body_part VARCHAR(50),
+  protocol VARCHAR(100),
+  scope VARCHAR(20) NOT NULL, -- GLOBAL | HOSPITAL | USER
+  owner_id UUID,
+  template JSONB NOT NULL,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+Template JSON Example
+{
+  "sections": [
+    {
+      "name": "Findings",
+      "type": "structured",
+      "fields": [
+        { "label": "Lung Nodules", "type": "checkbox" }
+      ]
+    }
+  ]
+}
+🧩 report_macros (Phrase Library)
+CREATE TABLE report_macros (
+  id UUID PRIMARY KEY,
+  trigger VARCHAR(50) NOT NULL,
+  content TEXT NOT NULL,
+  owner_id UUID,
+  scope VARCHAR(20), -- USER | HOSPITAL
+  created_at TIMESTAMP DEFAULT NOW()
+);
+3️⃣ KEY IMAGES & MEASUREMENTS
+🖼️ report_key_images
+CREATE TABLE report_key_images (
+  id UUID PRIMARY KEY,
+  report_id UUID NOT NULL,
+  sop_instance_uid TEXT NOT NULL,
+  frame_number INT,
+  annotation JSONB,
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  CONSTRAINT fk_key_images_report FOREIGN KEY (report_id) REFERENCES reports(id)
+);
+Key images are references, not stored files.
+📐 report_measurements
+CREATE TABLE report_measurements (
+  id UUID PRIMARY KEY,
+  report_id UUID NOT NULL,
+  name VARCHAR(100),
+  value NUMERIC,
+  unit VARCHAR(20),
+  source VARCHAR(50), -- US | CT | MR
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  CONSTRAINT fk_measurements_report FOREIGN KEY (report_id) REFERENCES reports(id)
+);
+Supports:
+Ultrasound
+Doppler
+CT / MR measurements
+4️⃣ AI & VOICE (TRACKED, NOT AUTHORITATIVE)
+🤖 report_ai_suggestions
+CREATE TABLE report_ai_suggestions (
+  id UUID PRIMARY KEY,
+  report_id UUID NOT NULL,
+  suggestion JSONB NOT NULL,
+  accepted BOOLEAN,
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  CONSTRAINT fk_ai_report FOREIGN KEY (report_id) REFERENCES reports(id)
+);
+Every AI suggestion is logged.
+🎤 report_voice_sessions
+CREATE TABLE report_voice_sessions (
+  id UUID PRIMARY KEY,
+  report_id UUID NOT NULL,
+  provider VARCHAR(50),
+  transcript TEXT,
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  CONSTRAINT fk_voice_report FOREIGN KEY (report_id) REFERENCES reports(id)
+);
+5️⃣ CRITICAL FINDINGS & ALERTS
+🚨 report_critical_flags
+CREATE TABLE report_critical_flags (
+  id UUID PRIMARY KEY,
+  report_id UUID NOT NULL,
+  severity VARCHAR(20),
+  description TEXT,
+  acknowledged BOOLEAN DEFAULT FALSE,
+  acknowledged_by UUID,
+  acknowledged_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  CONSTRAINT fk_critical_report FOREIGN KEY (report_id) REFERENCES reports(id)
+);
+6️⃣ AUDIT TRAIL (MANDATORY)
+🧾 report_audit_log
+CREATE TABLE report_audit_log (
+  id UUID PRIMARY KEY,
+  report_id UUID,
+  user_id UUID NOT NULL,
+  action VARCHAR(50),
+  details JSONB,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+This satisfies:
+Legal
+Compliance
+Accreditation
+7️⃣ RELATIONSHIP SUMMARY (MENTAL MODEL)
+reports
+ ├── report_versions (immutable history)
+ ├── report_key_images
+ ├── report_measurements
+ ├── report_ai_suggestions
+ ├── report_voice_sessions
+ ├── report_critical_flags
+ └── report_audit_log
+Templates live outside reports and are referenced at creation time.
+✅ Immutable report storage
+✅ Legal-grade versioning
+✅ Template & macro system
+✅ AI & voice traceability
+✅ Measurement & key image support
+✅ Audit-ready schema
+
+This schema can support:
+Single clinic
+Multi-hospital enterprise
+Research
+AI pipelines
+👉 3️⃣ API contracts for Reporting Module
+📡 REPORTING MODULE — API CONTRACTS (AUTHORITATIVE)
+Core API Principles (LOCKED)
+State-aware APIs (Draft ≠ Final)
+RBAC enforced at API level
+Immutable-by-design
+Idempotent where possible
+Audit on every mutation
+All endpoints are under:
+/api/reporting
+1️⃣ REPORT CREATION & RETRIEVAL
+➕ Create Report (Draft)
+POST /api/reporting/reports
+RBAC
+✅ Radiologist only
+Request
+{
+  "studyId": "uuid",
+  "templateId": "uuid (optional)"
+}
+Behavior
+Creates reports row
+Inserts version 1 in report_versions
+State = DRAFT
+Response
+📄 Get Report by Study
+GET /api/reporting/reports/by-study/{studyId}
+RBAC
+Radiologist: RW (state-aware)
+Clinician: Read-only
+Admin: ❌
+Response
+{
+  "reportId": "uuid",
+  "state": "DRAFT",
+  "currentVersion": 3,
+  "content": { ... },
+  "signedBy": null,
+  "signedAt": null
+}
+🕘 Get Report Versions (Audit View)
+GET /api/reporting/reports/{reportId}/versions
+RBAC
+Radiologist: Read
+Compliance Officer: Read
+Response
+[
+  {
+    "version": 1,
+    "state": "DRAFT",
+    "createdAt": "2025-01-01T10:00:00Z"
+  },
+  {
+    "version": 2,
+    "state": "PRELIM",
+    "createdAt": "2025-01-01T10:10:00Z"
+  }
+]
+2️⃣ REPORT EDITING (DRAFT / PRELIM ONLY)
+✏️ Update Report Content
+PUT /api/reporting/reports/{reportId}
+RBAC
+Radiologist only
+❌ Final / Addendum states
+Request
+{
+  "content": {
+    "findings": "...",
+    "impression": "..."
+  }
+}
+Behavior
+Inserts new row in report_versions
+Increments version
+Updates reports.current_version
+3️⃣ REPORT STATE TRANSITIONS (STRICT)
+🟠 Move to Preliminary
+POST /api/reporting/reports/{reportId}/preliminary
+RBAC
+Radiologist
+Behavior
+State → PRELIM
+Snapshot version created
+Clinicians can now view
+🔵 Finalize Report (LEGAL ACTION)
+POST /api/reporting/reports/{reportId}/finalize
+
+RBAC
+Radiologist
+Requires re-auth (password / MFA)
+Request
+{
+  "signature": "digital-signature-hash"
+}
+Behavior
+State → FINAL
+Signed + timestamped
+Locked forever
+Triggers:
+HL7 ORU
+PDF generation
+Audit entry
+4️⃣ ADDENDUM (POST-FINAL ONLY)
+➕ Add Addendum
+POST /api/reporting/reports/{reportId}/addendum
+RBAC
+Radiologist / Senior Radiologist
+Request
+{
+  "reason": "Correction",
+  "content": "Addendum text..."
+}
+Behavior
+New version
+State = ADDENDUM
+Original content untouched
+5️⃣ KEY IMAGES & MEASUREMENTS
+🖼️ Add Key Image
+POST /api/reporting/reports/{reportId}/key-images
+RBAC
+Radiologist
+Draft / Prelim / Addendum only
+Request
+{
+  "sopInstanceUID": "...",
+  "frameNumber": 12,
+  "annotation": { "arrow": true }
+}
+📐 Add Measurement
+POST /api/reporting/reports/{reportId}/measurements
+RBAC
+Radiologist
+Request
+{
+  "name": "PSV",
+  "value": 120,
+  "unit": "cm/s",
+  "source": "US"
+}
+
+6️⃣ TEMPLATES & MACROS
+📑 Get Templates
+GET /api/reporting/templates?modality=CT&bodyPart=Chest
+RBAC
+Radiologist
+Admin (manage)
+➕ Create / Update Template (Admin)
+POST /api/reporting/templates
+PUT  /api/reporting/templates/{id}
+⚡ Macros (Phrase Library)
+GET  /api/reporting/macros
+POST /api/reporting/macros
+7️⃣ VOICE & AI (AUGMENTATION ONLY)
+🎤 Save Voice Session
+POST /api/reporting/reports/{reportId}/voice
+Data stored for traceability only.
+🤖 AI Suggestions
+POST /api/reporting/reports/{reportId}/ai/suggest
+Response
+{
+  "suggestions": [
+    {
+      "type": "IMPRESSION",
+      "text": "Findings suggest pneumonia"
+    }
+  ]
+}
+✅ Accept / Reject AI Suggestion
+POST /api/reporting/reports/{reportId}/ai/{suggestionId}/accept
+POST /api/reporting/reports/{reportId}/ai/{suggestionId}/reject
+Logged permanently.
+8️⃣ CRITICAL FINDINGS
+🚨 Flag Critical Finding
+POST /api/reporting/reports/{reportId}/critical
+Behavior
+Alerts triggered
+Acknowledgement tracked
+9️⃣ AUDIT (READ-ONLY)
+🧾 Get Report Audit Log
+GET /api/reporting/reports/{reportId}/audit
+RBAC:
+Compliance
+Admin (read-only)
+🔐 WHAT WE JUST LOCKED
+
+You now have:
+
+✅ State-safe APIs
+✅ RBAC enforced at endpoint level
+✅ Immutable reporting behavior
+✅ AI & voice safely integrated
+✅ Legal & audit readiness
+At this point:
+You can start coding with confidence
+Now we move from architecture → implementation.
+Pick one:
+
+1️⃣ Backend implementation order & folder structure
+architecture → executable reality in a controlled, professional way.
+Below is a backend implementation order + folder structure that is:
+Healthcare-grade
+Easy to scale
+Safe for audits
+Friendly to future microservices (without forcing them now)
+I’ll assume Node.js + TypeScript + Express/Nest-like structure (works for both)
+✅ IMPLEMENTATION ORDER (LOCK THIS)
+Phase 1 — Foundation (Must be first)
+Project bootstrap
+Database + migrations
+Auth + RBAC middleware
+Audit logging
+Phase 2 — Clinical Core
+RIS Core (patients, studies)
+PACS abstraction
+Viewer orchestration
+Phase 3 — Reporting (Now safe)
+Reporting module (using locked APIs)
+Templates & macros
+Key images & measurements
+Phase 4 — Intelligence & Ops
+Voice + AI adapters
+Notifications
+Admin module
+This avoids rewrites and legal risk.
+📁 RECOMMENDED BACKEND FOLDER STRUCTURE
+backend/
+├── src/
+│   ├── app.ts                  # App bootstrap
+│   ├── server.ts               # HTTP server
+│   │
+│   ├── config/                 # Central config
+│   │   ├── env.ts
+│   │   ├── database.ts
+│   │   └── security.ts
+│   │
+│   ├── common/                 # Shared utilities
+│   │   ├── errors/
+│   │   ├── logger/
+│   │   ├── audit/
+│   │   ├── middleware/
+│   │   └── types/
+│   │
+│   ├── auth/                   # Authentication & RBAC
+│   │   ├── auth.controller.ts
+│   │   ├── auth.service.ts
+│   │   ├── rbac.ts
+│   │   └── guards.ts
+│   │
+│   ├── users/                  # Users & roles
+│   │   ├── users.controller.ts
+│   │   ├── users.service.ts
+│   │   └── users.model.ts
+│   │
+│   ├── ris/                    # RIS Core
+│   │   ├── patients/
+│   │   ├── studies/
+│   │   ├── appointments/
+│   │   └── worklist/
+│   │
+│   ├── pacs/                   # PACS abstraction
+│   │   ├── pacs.registry.ts
+│   │   ├── orthanc.adapter.ts
+│   │   ├── dcm4chee.adapter.ts
+│   │   └── pacs.service.ts
+│   │
+│   ├── viewer/                 # Viewer orchestration
+│   │   ├── viewer.registry.ts
+│   │   ├── viewer.controller.ts
+│   │   └── viewer.service.ts
+│   │
+│   ├── reporting/              # ⭐ MOST IMPORTANT
+│   │   ├── reports.controller.ts
+│   │   ├── reports.service.ts
+│   │   ├── reports.state.ts    # Workflow enforcement
+│   │   ├── templates/
+│   │   ├── macros/
+│   │   ├── key-images/
+│   │   ├── measurements/
+│   │   └── audit/
+│   │
+│   ├── integrations/           # HL7 / FHIR / AI
+│   │   ├── hl7/
+│   │   ├── fhir/
+│   │   └── ai/
+│   │
+│   ├── admin/                  # Admin-only APIs
+│   │   ├── system/
+│   │   ├── backup/
+│   │   └── monitoring/
+│   │
+│   ├── notifications/          # Alerts, critical findings
+│   │
+│   └── routes.ts               # Route registration
+│
+├── migrations/                 # DB migrations
+│
+├── tests/                      # Unit & integration tests
+│
+├── Dockerfile
+└── package.json
+🔑 WHY THIS STRUCTURE WORKS (IMPORTANT)
+1️⃣ Reporting is isolated
+No accidental admin edits
+Clean audit trail
+Easy legal review
+
+2️⃣ PACS is abstracted
+Orthanc today
+dcm4chee tomorrow
+Zero RIS changes
+
+3️⃣ Viewer is not hardcoded
+OHIF
+Weasis
+Future AI viewers
+
+4️⃣ Admin is separated
+Reduces breach risk
+Simplifies compliance audits
+🧠 HOW TO IMPLEMENT (STEP-BY-STEP)
+STEP 1 — Bootstrap
+Express/Nest
+TypeScript
+Env config
+Logger
+Error handler
+STEP 2 — Auth & RBAC
+JWT
+Role resolver
+State-aware guards
+Session tracking
+STEP 3 — Database
+Apply migrations (reports schema already locked)
+Read-only connections for viewers
+Write connections for clinical APIs
+STEP 4 — Reporting Module FIRST (after auth)
+Why
+Reporting is the most complex — everything else feels easy after.
+🟢 WHAT YOU CAN START CODING TODAY
+You can safely start with:
+auth/ (JWT + RBAC)
+reporting/reports.state.ts
+reporting/reports.service.ts
+DB migrations (already designed)
+1️⃣ RBAC middleware + state guards (code-level)
+2️⃣ Reporting service implementation skeleton (code)
+3️⃣ Transaction & audit logging strategy (code)
+We’ll now lock RBAC + state-aware guards at code level — this is the gatekeeper of your entire system.
+What I’ll give you is production-grade backend patterns, not toy examples.
+Assumptions:
+Node.js + TypeScript
+Express-style middleware (NestJS compatible)
+JWT auth
+PostgreSQL
+You already locked:
+Roles
+Report states
+🔐 RBAC + STATE GUARDS — PROFESSIONAL IMPLEMENTATION
+🎯 GOAL
+Enforce WHO can do WHAT, WHEN, and ON WHICH STATE, at the API layer, not frontend.
+1️⃣ CORE CONCEPT (LOCK THIS)
+Authorization =
+Authenticated User
++ Assigned Roles
++ Requested Action
++ Resource State
+→ ALLOW or DENY
+Frontend never decides permissions.
+2️⃣ USER CONTEXT (JWT PAYLOAD)
+Every request must resolve this once
+
+
+
+
+Reporting Module:
+
+build the specific "Checklist Form" logic next, so that checking "Normal Lungs" automatically writes that sentence into the editor?
+make the Smart Form dynamic so that it automatically switches between "Chest" and "Brain" lists based on the patient.modality or patient.bodyPart data fetched from the PACS?
+add a "Normal Study" master button that fills the entire report with all normal findings for that body part in one click?
+add a "Critical Finding" Alert system that automatically sends a notification/email to the referring physician if the "Critical" toggle is active when you sign the report?
+add a "History" window that pops up to show previous reports for this same patient while you are writing the current one?
+implement a "Voice Command" listener? For example, you could say "Apply Normal Chest" and the system would automatically inject that template without you having to click anything.
+add a "Smart Summary" button that uses the local text to generate an 'Impression' section at the bottom of the report?
+add a "Follow-up Recommendation" dropdown that lets you quickly insert standard follow-up intervals (e.g., "Recommend follow-up CT in 6 months per Fleischner criteria")?
+add build a "Draft Save" system that automatically pushes the report content to your database every 30 seconds so you never lose work if the browser crashes?
+add a "Collaborate" button that allows you to tag another radiologist or resident for a 'Secondary Review' before the report is finalized?

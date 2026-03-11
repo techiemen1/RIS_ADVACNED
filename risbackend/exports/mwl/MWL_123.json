@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2025-11-26T09:21:01.959Z",
+  "entry": {
+    "patient_name": "RADHIKA.H",
+    "patient_id_str": "2980987",
+    "patient_dob": null,
+    "patient_sex": null,
+    "accession_number": "123",
+    "study_instance_uid": null,
+    "modality": "US",
+    "scheduled_datetime": "2025-11-26T09:20:00.000Z",
+    "station_aet": "IPACX_MWL",
+    "description": "ASDF "
+  }
+}

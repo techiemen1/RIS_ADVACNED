@@ -1,0 +1,5 @@
+/* src/components/DateRangePicker.css */
+.drp-root { display: inline-block; }
+.drp-button { min-width: 240px; text-align: left; }
+.drp-panel { min-width: 560px; max-width: 90vw; }
+

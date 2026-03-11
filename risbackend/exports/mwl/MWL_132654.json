@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2025-11-26T09:19:02.810Z",
+  "entry": {
+    "patient_name": "RASHMIPRIYA^21Y",
+    "patient_id_str": "2882262",
+    "patient_dob": null,
+    "patient_sex": null,
+    "accession_number": "132654",
+    "study_instance_uid": null,
+    "modality": "US",
+    "scheduled_datetime": "2025-11-26T09:18:00.000Z",
+    "station_aet": "IPACX_MWL",
+    "description": "REERENCE"
+  }
+}

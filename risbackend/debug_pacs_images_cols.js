@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('./config/postgres'); async function run(){ try { const res = await pool.query("SELECT column_name FROM information_schema.columns WHERE table_name = 'pacs_report_images'"); console.log(res.rows.map(r=>r.column_name)); } catch(e){ console.log('ERROR: ' + e.message); } pool.end(); } run();

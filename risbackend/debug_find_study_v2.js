@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('./config/postgres'); async function run(){ try { const res = await pool.query('SELECT study_instance_uid FROM study_metadata LIMIT 1'); console.log(res.rows[0]); } catch(e){ console.error(e); } finally { pool.end(); } } run();

@@ -1,0 +1,42 @@
+RIS
+
+✅ What’s Solid
+📁 /controller/
+
+    auditController.js, authController.js, userController.js — clear separation of concerns.
+
+    Good naming convention. Suggest adding adminController.js if you plan to manage users or roles.
+
+📁 /db/
+
+    index.js likely holds your pg.Pool config — perfect.
+
+    If you’re scaling, consider adding migration.js or integrating with tools like node-pg-migrate.
+
+📁 /middleware/
+
+    authMiddleware.js — great for JWT verification.
+
+    Consider adding roleMiddleware.js for granular access control (e.g., admin, radiologist, technician).
+
+📁 /models/
+
+    userModel.js — good start. If you expand to audit logs, consider adding auditModel.js for reusable queries.
+
+📁 /routes/
+
+    auditRoutes.js, authRoutes.js, userRoutes.js — clean routing.
+
+    auth.js and UserProfile.js seem out of place — are they route handlers or components? Consider renaming or relocating.
+
+📁 /utils/
+
+    jwt.js — perfect for token generation and verification.
+
+    You might add logger.js for centralized logging, especially for audit trails.
+
+📁 /uploads/
+
+    profile_pics/ — good start. Make sure you validate file types and sanitize filenames.
+
+    Consider adding uploads/audit_exports/ if you plan to support CSV or PDF exports.

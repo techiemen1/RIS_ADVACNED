@@ -1,0 +1,72 @@
+// services/speechService.js
+const axios = require("axios");
+const FormData = require("form-data");
+const fs = require("fs");
+const path = require("path");
+const { pool } = require("../config/postgres");
+const { Groq } = require("groq-sdk");
+
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+// Load current STT setting
+async function getSTTMode() {
+  const r = await pool.query("SELECT value FROM system_settings WHERE key='stt_engine'");
+  if (r.rows.length === 0) return "offline";
+  return r.rows[0].value.mode || "offline";
+}
+
+/* -----------------------------
+   OFFLINE STT → VOSK
+-------------------------------- */
+async function voskSTT(audioBuffer) {
+  try {
+    const r = await axios.post("http://localhost:5001/stt", audioBuffer, {
+      headers: { "Content-Type": "application/octet-stream" },
+      timeout: 15000,
+    });
+    return r.data.text || "";
+  } catch (err) {
+    console.log("Vosk STT failed:", err.message);
+    return null;
+  }
+}
+
+/* -----------------------------
+   CLOUD STT → Groq Whisper V3 Turbo (FREE)
+-------------------------------- */
+async function whisperSTT(audioBuffer) {
+  try {
+    const tempFile = path.join(__dirname, "..", "tmp_audio.wav");
+    fs.writeFileSync(tempFile, audioBuffer);
+
+    const response = await groq.audio.transcriptions.create({
+      file: fs.createReadStream(tempFile),
+      model: "whisper-large-v3-turbo",
+      response_format: "text",
+    });
+
+    fs.unlinkSync(tempFile);
+    return response;
+  } catch (err) {
+    console.log("Whisper/Groq STT failed:", err.message);
+    return null;
+  }
+}
+
+/* -----------------------------
+   HYBRID LOGIC
+-------------------------------- */
+async function transcribeAudio(audioBuffer) {
+  const mode = await getSTTMode();
+
+  if (mode === "offline") return await voskSTT(audioBuffer);
+  if (mode === "cloud") return await whisperSTT(audioBuffer);
+
+  // Hybrid
+  const offline = await voskSTT(audioBuffer);
+  if (offline && offline.trim() !== "") return offline;
+
+  return await whisperSTT(audioBuffer);
+}
+
+module.exports = { transcribeAudio, getSTTMode };

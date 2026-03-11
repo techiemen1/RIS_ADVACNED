@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('./config/postgres'); async function run(){ const res = await pool.query("SELECT * FROM pacs_reports LIMIT 1"); console.log(res.rows); pool.end(); } run();

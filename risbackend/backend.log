@@ -1,0 +1,723 @@
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (54) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+🚀 iPacx RIS Server running on https://0.0.0.0:5000
+🔒 HTTPS enabled - Microphone access available everywhere
+✅ PostgreSQL connected successfully
+✅ Connected to PostgreSQL via Sequelize as user: ipacx
+📦 Active database: ris_advanced_db
+✅ Connected to PostgreSQL as: ipacx, session: ipacx
+✅ PACS & Settings Schemas Verified
+✅ PACS Model initialized
+✅ Database initialized
+📦 Connected to Postgres: ris_advanced_db
+[MWL] Native DICOM SCP listening on port 11112 (AE: RIS_MWL)
+2026-02-07T10:12:53.099Z -- INFO -- DICOM server listening on port 11112 
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 6.501 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 1.661 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/patients [32m200[0m 24.968 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[0mGET /api/patients [32m200[0m 25.472 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 1.405 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 1.541 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/patients [32m200[0m 14.129 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[0mGET /api/patients [32m200[0m 18.713 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 1.654 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 1.007 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/patients [32m200[0m 15.781 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[0mGET /api/patients [32m200[0m 15.929 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 0.896 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/auth/me [32m200[0m 1.186 ms - 67[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0',
+  accept: 'application/json, text/plain, */*',
+  'accept-language': 'en-US,en;q=0.9',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  expires: '0',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y',
+  referer: 'https://192.168.1.34:3000/patients',
+  cookie: '_pk_id.1.1131=7716246a6aebedde.1768998498.',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  te: 'trailers',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA0NTc2ODksImV4cCI6MTc3MzA0OTY4OX0.xcuBL3Iqb05IY3dlFrmGZKtXMh8LlBXpSm5bUatCh_Y
+[0mGET /api/patients [32m200[0m 15.652 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[0mGET /api/patients [32m200[0m 23.588 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[0mGET /api/auth/me [32m200[0m 1.170 ms - 68[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[0mGET /api/auth/me [32m200[0m 1.036 ms - 68[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 88.210 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[0mGET /api/analytics/dashboard [32m200[0m 93.916 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/patients',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/patients',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[0mGET /api/patients [32m200[0m 5.921 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[0mGET /api/patients [32m200[0m 6.820 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/patients',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[0mGET /api/auth/me [32m200[0m 0.714 ms - 68[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/auth/me | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/patients',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[0mGET /api/auth/me [32m200[0m 0.654 ms - 68[0m
+[AUDIT] GET /api/auth/me → 200
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/patients',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[INCOMING] GET /api/patients | Origin: undefined | IP: 127.0.0.1
+[AuthDebug] Headers: {
+  'sec-ch-ua-platform': '"Windows"',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ',
+  'cache-control': 'no-cache',
+  pragma: 'no-cache',
+  'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+  'sec-ch-ua-mobile': '?0',
+  expires: '0',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-dest': 'empty',
+  referer: 'https://192.168.1.34:3000/patients',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'accept-language': 'en,kn;q=0.9',
+  priority: 'u=1, i',
+  host: '127.0.0.1:5000',
+  connection: 'close'
+}
+[AuthDebug] AuthHeader: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJsZWtoYW5hIiwicm9sZSI6InN0YWZmIiwiaWF0IjoxNzcwNDUxNTU0LCJleHAiOjE3NzMwNDM1NTR9.0wf-Ium6dxmx6yO9FKZ1jPRZ-Vnug9ltn6XU9jhVpAQ
+[0mGET /api/patients [32m200[0m 17.613 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[0mGET /api/patients [32m200[0m 18.478 ms - -[0m
+[AUDIT] GET /api/patients → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 78.968 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[0mGET /api/analytics/dashboard [32m200[0m 86.063 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 48.626 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 56.160 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 71.719 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 44.548 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 59.209 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 47.942 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 379.593 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 229.082 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 60.327 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 67.861 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 53.533 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 50.659 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 726.429 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 49.434 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 85.694 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 61.412 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 146.544 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 48.304 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 59.133 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 66.123 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 1797.665 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 634.700 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200
+[INCOMING] GET /api/analytics/dashboard | Origin: undefined | IP: 127.0.0.1
+📡 Fetching PACS: http://localhost:8042/qido/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dcm4chee-arc/rs/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+📡 Fetching PACS: http://localhost:8042/dicom-web/studies?StudyDate=20260131-20260207&limit=1&includefield=00081030&includefield=00080061&includefield=00180015&includefield=00080020&includefield=00100010&includefield=00100020&includefield=00080050&includefield=00100040&includefield=00101010&includefield=00080090
+[0mGET /api/analytics/dashboard [32m200[0m 9982.969 ms - 290[0m
+[AUDIT] GET /api/analytics/dashboard → 200

@@ -1,0 +1,1 @@
+require('dotenv').config(); const bcrypt = require('bcryptjs'); const { pool } = require('./config/postgres'); async function run(){ const hash = await bcrypt.hash('password', 10); console.log('Hash:', hash); const res = await pool.query('UPDATE users SET password_hash =  WHERE username = ', [hash, 'admin1']); console.log('Updated rows:', res.rowCount); pool.end(); } run();

@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('../config/postgres'); (async () => { await pool.query('DELETE FROM modalities WHERE ae_title IS NULL'); console.log('Cleaned invalid modalities'); process.exit(); })();

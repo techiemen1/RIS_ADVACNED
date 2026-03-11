@@ -1,0 +1,5 @@
+{
+  "hydrocephalus": { "term": "Hydrocephalus", "definition": "Excess CSF within the cerebral ventricles." },
+  "effusion": { "term": "Effusion", "definition": "Collection of fluid in a body cavity or joint." },
+  "atelectasis": { "term": "Atelectasis", "definition": "Collapse of lung tissue leading to loss of volume." }
+}

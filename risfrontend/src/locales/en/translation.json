@@ -1,0 +1,14 @@
+{
+    "patient_registration": "Patient Registration",
+    "name": "Name",
+    "age": "Age",
+    "gender": "Gender",
+    "aadhaar_number": "Aadhaar Number",
+    "abha_id": "ABHA ID",
+    "preferred_language": "Preferred Language",
+    "study_description": "Study Description",
+    "date": "Date",
+    "add": "Add",
+    "update": "Update",
+    "cancel": "Cancel"
+}

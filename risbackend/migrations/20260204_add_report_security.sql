@@ -1,0 +1,4 @@
+ALTER TABLE pacs_reports ADD COLUMN IF NOT EXISTS content_hash VARCHAR(64);
+ALTER TABLE pacs_reports ADD COLUMN IF NOT EXISTS digital_signature TEXT;
+ALTER TABLE pacs_reports ADD COLUMN IF NOT EXISTS signer_id INTEGER REFERENCES users(id);
+ALTER TABLE pacs_reports ADD COLUMN IF NOT EXISTS signed_at TIMESTAMP;

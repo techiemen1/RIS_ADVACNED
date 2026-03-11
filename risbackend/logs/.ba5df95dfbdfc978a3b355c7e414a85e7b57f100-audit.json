@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "/home/jags/RIS/risbackend/logs/.ba5df95dfbdfc978a3b355c7e414a85e7b57f100-audit.json",
+    "files": [
+        {
+            "date": 1761289596703,
+            "name": "/home/jags/RIS/risbackend/logs/app-2025-10-24.log",
+            "hash": "e807dd1160addecedbccf54a099bec8e1c930c6d99ff8c9a8b742512e27e73b2"
+        }
+    ],
+    "hashType": "sha256"
+}

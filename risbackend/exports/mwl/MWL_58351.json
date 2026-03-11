@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2025-11-26T08:07:22.086Z",
+  "entry": {
+    "patient_name": "RAMDEV^ORAON^29Y/M",
+    "patient_id_str": "3129834",
+    "patient_dob": null,
+    "patient_sex": null,
+    "accession_number": "58351",
+    "study_instance_uid": "1.2.392.200036.9125.2.13210514785539.65116189046.3400184",
+    "modality": null,
+    "scheduled_datetime": "2025-11-26T08:07:22.050Z",
+    "station_aet": "IPACX_MWL",
+    "description": "PACS Study"
+  }
+}

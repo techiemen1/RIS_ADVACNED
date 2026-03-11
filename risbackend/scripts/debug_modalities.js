@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('../config/postgres'); (async () => { try { const r = await pool.query('SELECT * FROM modalities'); console.log('Row Count:', r.rowCount); console.log(r.rows); } catch(e) { console.error(e); } finally { await pool.end(); } })();

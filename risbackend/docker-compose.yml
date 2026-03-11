@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ipacx
+      POSTGRES_PASSWORD: xcap1
+      POSTGRES_DB: ipacx_user_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  mongo:
+    image: mongo:6
+    command: mongod --replSet rs0 --bind_ip_all
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodata:/data/db
+
+  orthanc:
+    image: jodogne/orthanc:1.12.9
+    ports:
+      - '8042:8042'
+      - '4242:4242'
+
+  app:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - '5000:5000'
+    depends_on:
+      - postgres
+      - mongo
+      - orthanc
+    volumes:
+      - ./uploads:/app/uploads
+
+volumes:
+  pgdata:
+  mongodata:

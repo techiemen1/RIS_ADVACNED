@@ -1,0 +1,92 @@
+ipacx-ris/
+├── docs/
+│   ├── architecture.md
+│   ├── deployment.md
+│   └── security.md
+│
+├── database/
+│   ├── schema/
+│   ├── migrations/
+│   └── seed/
+│
+├── backend/          # empty for now
+├── frontend/         # empty for now
+│
+├── pacs/
+|   ├── dcm4chee-arc/ 	
+│   ├── orthanc/
+│   └── dicom/
+│
+├── docker/
+│   ├── postgres/
+│   ├── portainer/
+|   ├── dcm4chee-arc/
+│   └── orthanc/
+│
+├── docker-compose.yml
+├── .env.example
+├── .gitignore
+└── README.md
+
+ipacx-ris/
+├── docs/
+│   ├── architecture.md
+│   ├── deployment.md
+│   ├── security.md
+│   └── compliance.md
+│
+├── database/
+│   ├── schema/
+│   ├── migrations/
+│   └── seed/
+│
+├── backend/              # EMPTY (Phase 1)
+├── frontend/             # EMPTY (Phase 2)
+│
+├── pacs/
+│   ├── dcm4chee-arc/
+│   │   └── README.md
+│   ├── orthanc/
+│   │   └── README.md
+│   └── dicom/
+│       └── README.md
+│
+├── docker/
+│   ├── postgres/
+│   │   └── docker-compose.yml
+│   ├── portainer/
+│   │   └── docker-compose.yml
+│   ├── dcm4chee-arc/
+│   │   └── docker-compose.yml
+│   └── orthanc/
+│       └── docker-compose.yml
+│
+├── docker-compose.yml     # Root Orchestrator
+├── .env.example
+├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+└── README.md
+                ┌───────────────┐
+                │   Frontend    │
+                │ (RIS UI)      │
+                └───────┬───────┘
+                        │ REST
+                ┌───────▼───────┐
+                │   RIS API     │
+                └───────┬───────┘
+                        │
+        ┌───────────────┼────────────────┐
+        │               │                │
+┌───────▼───────┐ ┌─────▼────────┐ ┌─────▼────────┐
+│ Orthanc       │ │ dcm4chee-arc  │ │ Viewers      │
+│ (DICOM/DW)    │ │ (DICOM/DW)    │ │ OHIF/Weasis  │
+└───────────────┘ └───────────────┘ └──────────────┘
+RIS never stores DICOM
+RIS references PACS
+Viewers talk directly to PACS
+
+
+

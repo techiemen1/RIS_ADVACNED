@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: risbackend
+    build:
+      context: ./risbackend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./risbackend/.env
+    volumes:
+      - ./risbackend/uploads:/app/uploads
+    networks:
+      - risnetwork
+
+  frontend:
+    container_name: risfrontend
+    build:
+      context: ./risfrontend
+    ports:
+      - "3000:80"
+    networks:
+      - risnetwork
+    depends_on:
+      - backend
+
+networks:
+  risnetwork:
+    driver: bridge

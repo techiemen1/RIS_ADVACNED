@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # 🗄️ Database Service
+  risdb:
+    image: postgres:15-alpine
+    container_name: ris_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-ipacx}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-xcap1}
+      POSTGRES_DB: ${DB_NAME:-ris_advanced_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ris-network
+
+  # 🚀 Backend Service
+  risbackend:
+    build: ./risbackend
+    container_name: ris_backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER:-ipacx}:${DB_PASSWORD:-xcap1}@risdb:5432/${DB_NAME:-ris_advanced_db}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - risdb
+    volumes:
+      - ./risbackend/uploads:/app/uploads
+    networks:
+      - ris-network
+    expose:
+      - "5000"
+
+  # 🎙️ Vosk Speech Engine
+  vosk:
+    build:
+      context: .
+      dockerfile: Dockerfile.vosk
+    container_name: ris_vosk
+    restart: always
+    volumes:
+      - ./vosk-model:/app/vosk-model
+    networks:
+      - ris-network
+    expose:
+      - "2700"
+
+  # 🌐 Frontend (Nginx)
+  risfrontend:
+    build: ./risfrontend
+    container_name: ris_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - risbackend
+    networks:
+      - ris-network
+
+networks:
+  ris-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

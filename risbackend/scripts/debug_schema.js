@@ -1,0 +1,1 @@
+require('dotenv').config(); const { pool } = require('../config/postgres'); (async () => { try { const r = await pool.query("SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'modalities'"); console.log(r.rows); } catch(e) { console.error(e); } finally { await pool.end(); } })();
